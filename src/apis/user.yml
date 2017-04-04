@@ -1,0 +1,71 @@
+# http://swagger.io/specification/
+paths:
+  '/login':
+    post:
+      summary: Login with username and password
+      tags:
+        - example
+      description: Returns a user based on username
+      operationId: login
+      consumes:
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          description: Your username and password
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: Successful response.
+          schema:
+            '$ref': '#/definitions/User'
+  '/register':
+    post:
+      summary: Register with username and password
+      tags:
+        - example
+      description: Account info
+      operationId: register
+      consumes:
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            '$ref': '#/definitions/User'
+  '/profile/{id}':
+    get:
+      summary: Get user profile
+      tags:
+        - example
+      description: Account info
+      operationId: profile
+      parameters:
+        - name: id
+          in: path
+          description: id of the user
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful response.
+definitions:
+  User:
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+        default: 'Sam'
+      password:
+        type: string
+        default: 'pass'
