@@ -28,7 +28,7 @@ server.use(sessions({
 
 passport(server)
 
-restify.defaultResponseHeaders = function(data) {
+restify.defaultResponseHeaders = function() {
   this.header('Access-Control-Allow-Origin', '*')
 }
 

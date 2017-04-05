@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import restify from 'restify'
 import passport from 'passport'
 import { Strategy } from 'passport-local'
 

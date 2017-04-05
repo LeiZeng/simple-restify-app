@@ -23,6 +23,8 @@ mongoose.connection.on('disconnected', function () {
 process.on('SIGINT', function() {
   mongoose.connection.close(function () {
     console.log('Mongoose default connection disconnected through app termination');
+
+    /*eslint no-process-exit: 0*/
     process.exit(0);
   });
 });
