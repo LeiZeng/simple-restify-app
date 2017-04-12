@@ -1,5 +1,4 @@
 import winston from 'winston'
-
 import config from 'config'
 
 const logsPath = config.get('logsPath')
@@ -25,5 +24,31 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const logger = new (winston.Logger)({ transports: loggerTransporters });
+
+export const auditLogger = () => (req, res, route, err) => {
+  var latency = res.get('Response-Time');
+
+  if (typeof (latency) !== 'number') {
+    latency = Date.now() - req._time;
+  }
+
+  var obj = {
+    remoteAddress: req.connection.remoteAddress,
+    remotePort: req.connection.remotePort,
+    req_id: req.getId(),
+    latency: latency,
+    secure: req.secure,
+    path: req.path(),
+    _audit: true
+  };
+
+  logger.info('Audit -- ', obj);
+
+  if (err) {
+   logger.error('Error -- %s', err, obj)
+  }
+
+  return (true);
+}
 
 export default logger

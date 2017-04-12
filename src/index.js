@@ -2,7 +2,7 @@ import restify from 'restify'
 import sessions from 'client-sessions'
 import config from 'config'
 
-import logger from './logger'
+import logger, { auditLogger } from './logger'
 import './database'
 import passport from './passport'
 import * as user from './apis/user'
@@ -13,6 +13,7 @@ const port = config.get('port')
 server.pre(restify.pre.userAgentConnection())
 server.use(restify.bodyParser())
 server.use(restify.queryParser())
+server.on('after', gauditLogger())
 
 if (process.env.NODE_ENV === 'development') {
   require('./swagger').default(server)
