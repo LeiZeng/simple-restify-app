@@ -13,7 +13,7 @@ const port = config.get('port')
 server.pre(restify.pre.userAgentConnection())
 server.use(restify.bodyParser())
 server.use(restify.queryParser())
-server.on('after', gauditLogger())
+server.on('after', auditLogger())
 
 if (process.env.NODE_ENV === 'development') {
   require('./swagger').default(server)
