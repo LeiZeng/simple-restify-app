@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import passport from 'passport'
 import { Strategy } from 'passport-local'
 
+import logger from './logger'
+
 const User = mongoose.model('User')
 
 export default (server) => {
@@ -10,13 +12,13 @@ export default (server) => {
 
   // This is how a user gets serialized
   passport.serializeUser((user, done) => {
-    console.log('serialized', user);
+    logger.debug('serialized', user);
     done(null, user.id)
   })
 
   // This is how a user gets deserialized
   passport.deserializeUser((id, done) => {
-    console.log('de serialized', id);
+    logger.debug('de serialized', id);
     done(null, {id:'123456', username:'john'})
   });
 

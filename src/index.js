@@ -2,6 +2,7 @@ import restify from 'restify'
 import sessions from 'client-sessions'
 import config from 'config'
 
+import logger from './logger'
 import './database'
 import passport from './passport'
 import * as user from './apis/user'
@@ -37,8 +38,8 @@ server.post('/register', user.register)
 server.get('/profile/:id', user.profile)
 
 
-console.log(`running at ${process.env.NODE_ENV} mode.`)
+logger.info(`running at ${process.env.NODE_ENV} mode.`)
 
 server.listen(port)
 
-console.log(`server start at ${port}`)
+logger.info(`server start at ${port}`)

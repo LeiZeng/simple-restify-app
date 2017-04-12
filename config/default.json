@@ -1,4 +1,5 @@
 {
   "port": 1108,
-  "salt": "ble ble bleh"
+  "salt": "ble ble bleh",
+  "logsPath": "./logs"
 }
